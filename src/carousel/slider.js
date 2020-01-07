@@ -119,21 +119,20 @@ class Slider extends Component {
     const { SliderRef } = this.state;
     const newProps = { ...this.props, children: [] };
     const newPrevProps = { ...prevProps, children: [] };
-    const { children } = this.props;
+    const children = this.props.children || [];
+    
+    prevProps.children = prevProps.children || [];
     
     console.log(prevProps.children);
     console.log(children);
 
-    try {
-      if (children && prevProps.children && !isEqual(newProps, newPrevProps) || prevProps.children.length !== children.length) {
-        const { onReInit } = this.props;
-        this.init();
-        this.setRef(SliderRef);
-        if (onReInit && typeof onReInit === 'function') onReInit(this);
-      }
-    } catch(err) {
-      console.log(err);
+    if (!isEqual(newProps, newPrevProps) || prevProps.children.length !== children.length) {
+      const { onReInit } = this.props;
+      this.init();
+      this.setRef(SliderRef);
+      if (onReInit && typeof onReInit === 'function') onReInit(this);
     }
+
   }
 
   componentWillUnmount() {
