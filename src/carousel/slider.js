@@ -119,14 +119,12 @@ class Slider extends Component {
     const { SliderRef } = this.state;
     const newProps = { ...this.props, children: [] };
     const newPrevProps = { ...prevProps, children: [] };
-    const children = this.props.children || [];
-    
-    prevProps.children = prevProps.children || [];
-    
-    console.log(prevProps.children);
-    console.log(children);
+    const { children } = this.props;
 
-    if (!isEqual(newProps, newPrevProps) || prevProps.children.length !== children.length) {
+    var aux1 = prevProps.children || [];
+    var aux2 = children || [];
+
+    if (!isEqual(newProps, newPrevProps) || aux1.length !== aux2.length) {
       const { onReInit } = this.props;
       this.init();
       this.setRef(SliderRef);
