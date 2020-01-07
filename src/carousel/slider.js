@@ -120,12 +120,19 @@ class Slider extends Component {
     const newProps = { ...this.props, children: [] };
     const newPrevProps = { ...prevProps, children: [] };
     const { children } = this.props;
+    
+    console.log(prevProps.children);
+    console.log(children);
 
-    if (children !== null && prevProps.children !== null && !isEqual(newProps, newPrevProps) || prevProps.children.length !== children.length) {
-      const { onReInit } = this.props;
-      this.init();
-      this.setRef(SliderRef);
-      if (onReInit && typeof onReInit === 'function') onReInit(this);
+    try {
+      if (children && prevProps.children && !isEqual(newProps, newPrevProps) || prevProps.children.length !== children.length) {
+        const { onReInit } = this.props;
+        this.init();
+        this.setRef(SliderRef);
+        if (onReInit && typeof onReInit === 'function') onReInit(this);
+      }
+    } catch(err) {
+      console.log(err);
     }
   }
 
